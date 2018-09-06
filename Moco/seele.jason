@@ -1,0 +1,29 @@
+
+//java -jar moco-runner.jar http -p 8899 -c seele.jason
+
+[
+
+    {"description":"这是一个moco get demo文件",
+        "request":{
+        "uri":"/demo",
+        "method":"get"
+        }
+        ,
+        "response":{
+        "text":"我是demo"
+        }
+    }
+    ,
+        {"description":"这是一个moco post demo文件",
+            "request":{
+            "uri":"/post",
+            "method":"post",
+            }
+            ,
+            "response":{
+            "text":"我是demo"
+            }
+        }
+
+
+]

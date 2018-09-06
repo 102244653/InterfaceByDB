@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="API自动化测试" >
+
+    <test name="测试">
+        <classes>
+            <class name="test1"></class>
+            <class name="test2"></class>
+        </classes>
+    </test>
+
+    <listeners>
+        <listener class-name="TestReport.ExtentReporterListener"></listener>
+    </listeners>
+
+</suite>

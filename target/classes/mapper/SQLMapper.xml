@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CaseData">
+
+    <select id="MyInfo" parameterType="Integer" resultType="CaseData.MyInfo">
+        select * from myinfo WHERE id=#{id};
+    </select>
+
+
+    <select id="count" parameterType="CaseData.MyInfo" resultType="Integer">
+        select count(*) from myinfo;
+    </select>
+
+    <insert id="add" parameterType="CaseData.MyInfo">
+        insert into
+        myinfo(id,name,age,desca)
+        values
+        (#{id},#{name},#{age},#{desc});
+
+    </insert>
+
+
+
+</mapper>
