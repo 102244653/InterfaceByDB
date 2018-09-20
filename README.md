@@ -1,8 +1,8 @@
 # ApiDBTest
-使用mybatis在数据库维护接口测试用例
-使用java调用http/https请求测试接口
-同时生成html和Excel测试报告
-直接部署在jenkins平台自动测试
+一、使用mybatis在数据库维护接口测试用例
+二、使用java调用http/https请求测试接口
+三、同时生成html和Excel测试报告
+四、直接部署在jenkins平台自动测试
 
 1.编写接口参数类：
     ①每个接口编写一个类，写好所有参数类型
