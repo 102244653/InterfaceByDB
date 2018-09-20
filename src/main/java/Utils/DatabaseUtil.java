@@ -21,4 +21,15 @@ public class DatabaseUtil {
         return sqlSession;
     }
 
+
+    //获取用例总数
+    public static int count(String apiname){
+        int count=0;
+        try {
+            count= getSqlSession().selectOne(apiname);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 }

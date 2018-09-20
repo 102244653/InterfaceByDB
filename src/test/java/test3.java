@@ -14,13 +14,5 @@ public class test3 {
         System.out.println(myInfo.toString());
         int a=sql.selectOne("count",myInfo);
         System.out.println(a);
-        MyInfo AA=new  MyInfo();
-        AA.setId(5);
-        AA.setName("dsgsg");
-        AA.setAge("12");
-        AA.setDesc("4683");
-        sql.insert("add",AA);
-        int b=sql.selectOne("count",myInfo);
-        System.out.println(b);
     }
 }

@@ -51,7 +51,7 @@ public class DateUtils {
         String s = simpleDateFormat.format(new java.util.Date());
         logger.info(s);
         return s;
-    }
+}
 
     //获取系统时间，毫秒级别
     public static long time() {

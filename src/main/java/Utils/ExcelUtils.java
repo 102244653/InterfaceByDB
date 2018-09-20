@@ -81,9 +81,11 @@ public class ExcelUtils {
         for(int i=0;i<row.getLastCellNum();i++){
             HSSFCell cell = row.getCell(i);
             int cellType = cell.getCellType();
-            switch (cellType)
-            {
+            switch (cellType) {
                 default:
+                    result[i]=rowIndex+":"+i+"=error";
+                    logger.error("读取到单元格错误");
+                    break;
                 case 1 :
                 {
                     result[i] =String.valueOf(cell.getStringCellValue());
@@ -117,9 +119,13 @@ public class ExcelUtils {
                 return  null;
             }
             int cellType = cell.getCellType();
-            switch (cellType)
-            {
+            switch (cellType) {
                 default:
+                {
+                    result[k] = k + ":" + columnIndex + "=error";
+                    logger.error("读取到单元格错误");
+                    break;
+                }
                 case 1 :
                 {
                     result[k] =String.valueOf(cell.getStringCellValue());
@@ -208,6 +214,7 @@ public class ExcelUtils {
 
     //创建一个Excel
     public void CreatExcel(String path,String title,String[] value){
+        FileOutputStream os=null;
         try {
             // 创建 一个excel文档对象
             HSSFWorkbook workBook = new HSSFWorkbook();
@@ -265,18 +272,21 @@ public class ExcelUtils {
                 cell.setCellValue(value[i]);
                 cell.setCellStyle(style);
             }
-            FileOutputStream os = new FileOutputStream(path);
+            os= new FileOutputStream(path);
             workBook.write(os);// 将文档对象写入文件输出流
-            os.close();// 关闭文件输出流
         }catch (Exception e){
             logger.error("生成EXCEL文件失败");
+        }finally {
+            try {
+                os.close();// 关闭文件输出流
+            }catch (Exception e){}
         }
     }
 
     public HSSFCellStyle  mystyle(){
         font0.setFontHeightInPoints((short) 11);
         style0.setWrapText(true);
-//        style0.setAlignment(HSSFCellStyle.ALIGN_CENTER_SELECTION);// 水平居中
+        style0.setAlignment(HSSFCellStyle.ALIGN_CENTER_SELECTION);// 水平居中
         style0.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);// 垂直居中
         style0.setFont(font0);
         HSSFCellStyle mystyle=style0;

@@ -8,17 +8,24 @@
         select * from myinfo WHERE id=#{id};
     </select>
 
-
-    <select id="count" parameterType="CaseData.MyInfo" resultType="Integer">
+    <select id="count"  resultType="Integer">
         select count(*) from myinfo;
     </select>
+
+    <select id="postcase" parameterType="Integer" resultType="CaseData.post">
+        select * from post WHERE id=#{id};
+    </select>
+
+    <select id="countpost"  resultType="Integer">
+        select count(*) from post;
+    </select>
+
 
     <insert id="add" parameterType="CaseData.MyInfo">
         insert into
         myinfo(id,name,age,desca)
         values
         (#{id},#{name},#{age},#{desc});
-
     </insert>
 
 
