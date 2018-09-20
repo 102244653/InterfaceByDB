@@ -10,7 +10,7 @@
     ③添加一个Result（）方法，使其返回结果为ExcelReport数组结果（见4）
 
 2.读取测试用例：
-    在MyApiFarmeWork\src\main\resources\mapper\SQLMapper.xml中按接口用例表添加相应的读取用例的sql
+    在src\main\resources\mapper\SQLMapper.xml中按接口用例表添加相应的读取用例的sql
 
  示例：
  <select id="USER" 【接口名称即表名】 parameterType="Integer"  【请求参数类型，即读取第几条用例】 resultType="CaseData.USER"  【返回的参数类型】>
