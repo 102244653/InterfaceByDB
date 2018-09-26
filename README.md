@@ -25,11 +25,9 @@
 
  示例：
  
- <select id="USER" 【接口名称即表名】 parameterType="Integer"  【请求参数类型，即读取第几条用例】 resultType="CaseData.USER"  【返回的参数类型】>
-    
+            <select id="USER" 【接口名称即表名】 parameterType="Integer"  【请求参数类型，即读取第几条用例】 resultType="CaseData.USER"  【返回的参数类型】>
             select * from myinfo WHERE id=#{id}  【使用#{   }的形式参数化变量】;
-            
- </select>
+            </select>
 
 
 四、数据库用例设计：
