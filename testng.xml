@@ -5,7 +5,7 @@
 
     <test name="测试">
         <classes>
-            <class name="test1"></class>
+            <class name="test4"></class>
             <class name="test2"></class>
         </classes>
     </test>

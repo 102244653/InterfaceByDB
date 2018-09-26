@@ -221,13 +221,14 @@ public class ExcelUtils {
             // 创建一个工作薄对象
             HSSFSheet sheet = workBook.createSheet("Sheet1");
             // 设置列的宽度为
-            sheet.setColumnWidth(0,2500);
+            sheet.setColumnWidth(0,4000);
             sheet.setColumnWidth(1,6000);
-            sheet.setColumnWidth(2,10000);
-            sheet.setColumnWidth(3,18000);
-            sheet.setColumnWidth(4,8000);
-            sheet.setColumnWidth(5,18000);
-            sheet.setColumnWidth(6,3000);
+            sheet.setColumnWidth(2,8000);
+            sheet.setColumnWidth(3,8000);
+            sheet.setColumnWidth(4,12000);
+            sheet.setColumnWidth(5,8000);
+            sheet.setColumnWidth(6,10000);
+            sheet.setColumnWidth(7,4000);
             HSSFRow rowtitle=null;
             HSSFRow rowdata;
             //表头信息--整行合并

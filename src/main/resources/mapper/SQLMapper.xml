@@ -27,6 +27,12 @@
         (#{id},#{name},#{age},#{desc});
     </insert>
 
+    <select id="postcodecount"  resultType="Integer">
+         select count(*) from postcode;
+    </select>
 
+    <select id="postcode" parameterType="Integer" resultType="CaseData.postcode">
+        select * from postcode where ID=#{id};
+    </select>
 
 </mapper>

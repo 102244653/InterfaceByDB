@@ -12,7 +12,7 @@ public class test3 {
         SqlSession  sql= DatabaseUtil.getSqlSession();
         MyInfo myInfo=sql.selectOne("MyInfo",1);
         System.out.println(myInfo.toString());
-        int a=sql.selectOne("count",myInfo);
+        int a=sql.selectOne("count");
         System.out.println(a);
     }
 }

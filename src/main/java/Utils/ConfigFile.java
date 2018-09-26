@@ -11,5 +11,8 @@ public class ConfigFile {
 
     private static ResourceBundle bundle = ResourceBundle.getBundle("application", Locale.CHINA);
 
-
+    public static String getUrl(String name) {
+        String url= bundle.getString(name);
+        return url;
+    }
 }
