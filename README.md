@@ -17,18 +17,58 @@
     
     ②重写toString（）方法，使其返回结果为请求参数格式的数据
     
-    ③添加一个Result（）方法，使其返回结果为ExcelReport数组结果（见4）
+    ③添加一个Result（）方法，使其返回结果为ExcelReport数组结果
+    
+    public class postcode {
+    public int ID;
+    public String CaseName;
+    public String RequestMethod;
+    public String postcode;
+    public String areaname;
+    public String appkey;
+    public String sign;
+    public String format;
+    public String ExpectResult;
+    public String Effective;
+
+    @Override
+    public String toString(){
+        if(!postcode.equals("null")){
+            return "?app=life.postcode&postcode="+postcode+"&appkey="+appkey+"&sign="+sign+"&format="+format;
+        }else {
+            return "?app=life.postcode&areaname="+areaname+"&appkey="+appkey+"&sign="+sign+"&format="+format;
+        }
+
+    }
+
+    //组装报告的结果数组
+    public String[] Result(){
+        String[] result =new String[8];
+        result[0]= ConfigFile.getUrl("test.url");
+        result[1]="PostCode";
+        result[2]=CaseName;
+        result[3]=RequestMethod;
+        result[4]=this.toString();
+        result[5]=ExpectResult;
+        return result;
+    }
+    }
 
 三、读取测试用例：
 
     在src\main\resources\mapper\SQLMapper.xml中按接口用例表添加相应的读取用例的sql
-
+    
  示例：
  
-            <select id="USER" 【接口名称即表名】 parameterType="Integer"  【请求参数类型，即读取第几条用例】 resultType="CaseData.USER"  【返回的参数类型】>
-            select * from myinfo WHERE id=#{id}  【使用#{   }的形式参数化变量】;
-            </select>
-
+    #查询接口用例总数：
+     <select id="postcodecount"  resultType="Integer">
+         select count(*) from postcode;
+    </select>
+    
+    #查询接口单条用例：
+    <select id="postcode" 【接口名称即表名】 parameterType="Integer" 【请求参数类型，即读取第几条用例】 resultType="CaseData.postcode" 【返回      的参数类型】>
+        select * from postcode where ID=#{id} 【使用#{   }的形式参数化变量】;
+    </select>
 
 四、数据库用例设计：
 
@@ -58,7 +98,37 @@
         1          登录            post         zhangsan    123456       1           success           T
 
 
-五、ExcelReport数据结构：
+五、编写测试Case：
+
+    InitTest用于生成报告，Case类需继承它
+    public class InitTest {
+
+    @BeforeSuite
+    public void beforetest(){
+        InitExcelReport.InitExcel();
+    }
+
+
+    @AfterSuite
+    public void aftertest(){
+        new InitHtmlReport().CreatHtmlReport();
+    }
+    }
+    
+    用于执行的Case类,调用BaseCase基类处理数据、执行用例、记录结果：
+    public class Case extends InitTest{
+    @Test
+    public void TestPostCode(){
+        BaseCase baseCase=new BaseCase();
+        try {
+            baseCase.executecase("postcodecount","postcode");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    }
+
+六、ExcelReport数据结构：
 
     ①ID==用例编号（从1自增）
     
@@ -78,7 +148,18 @@
     
     ⑨每条用例执行结束后组装ExccelReport和HtnlReport数据，并写入结果
     
-六、执行用例：
+七、执行用例：
 
-    调用BaseCase（）方法进行用例编写【先读取用例总数，然后for（）循环执行用例】
+    【先读取用例总数，然后for（）循环执行用例】
+    使用testng.xml文件配置要执行的用例，在持续平台上直接执行testng.xml文件即可
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+    <suite name="API自动化测试" >
+    <test name="测试">
+        <classes>
+            <class name="test2"></class>
+        </classes>
+    </test>
+    </suite>
+    
     执行结束后在TestExcelReport查看Excel报告和TestReport查看html报告
