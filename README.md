@@ -3,7 +3,7 @@
 
 1、使用mybatis在数据库维护接口测试用例
 
-2、使用java调用http/https请求测试接口
+2、使用java发起http/https请求测试接口
 
 3、同时生成html和Excel测试报告
 
@@ -52,9 +52,9 @@
 
     [USER]
     
-    |  ID  |  CaseName   |  RequestMethod   |  uasername  |  password  |  type  |  ExpectResult  |   ISDO  |
+    |  ID  |  CaseName   |  RequestMethod   |  uasername  |  password  |  type  |  ExpectResult  |   Effective  |
     
-       1        登录            post           zhangsan       123456        1         success        true
+       1        登录            post           zhangsan       123456        1         success            T
 
 
 五、ExcelReport数据结构：
@@ -75,7 +75,7 @@
     
     ⑧Result==测试结果（Pass/Fail，默认为Fail）
     
-    ⑨每条用例执行结束后组装ExccelReport数据，并写入结果
+    ⑨每条用例执行结束后组装ExccelReport和HtnlReport数据，并写入结果
     
 六、执行用例：
 
