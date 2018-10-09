@@ -100,14 +100,14 @@
 
 五、编写测试Case：
 
-    InitTest用于生成报告，Case类需继承它
+    InitTest用于生成报告，Case类需继承它：
+    
     public class InitTest {
 
     @BeforeSuite
     public void beforetest(){
         InitExcelReport.InitExcel();
     }
-
 
     @AfterSuite
     public void aftertest(){
@@ -151,7 +151,8 @@
 七、执行用例：
 
     【先读取用例总数，然后for（）循环执行用例】
-    使用testng.xml文件配置要执行的用例，在持续平台上直接执行testng.xml文件即可
+    使用testng.xml文件配置要执行的用例，在持续平台上直接执行testng.xml文件即可：
+    
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
     <suite name="API自动化测试" >
