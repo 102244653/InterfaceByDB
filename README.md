@@ -49,12 +49,13 @@
     ⑦ISDO==用例是否有效
 
 示例：
-
+    
+    登录接口参数{用户名|密码|用户类型}
     [USER]
+    | 用例编号 |   用例名称 |      请求方式    |   用户名  |   密码    | 用户类型 |    预期结果   |  用例是否有效 | 
+    |   ID    |  CaseName  |  RequestMethod  | uasername | password |  type   |  ExpectResult |   Effective  |
     
-    |  ID  |  CaseName   |  RequestMethod   |  uasername  |  password  |  type  |  ExpectResult  |   Effective  |
-    
-       1        登录            post           zhangsan       123456        1         success            T
+        1          登录            post         zhangsan    123456       1           success           T
 
 
 五、ExcelReport数据结构：
