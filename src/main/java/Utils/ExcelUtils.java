@@ -207,9 +207,10 @@ public class ExcelUtils {
             excelFileOutPutStream.flush();
             // 使用后，及时关闭这个输出流对象， 好习惯，再强调一遍！
             excelFileOutPutStream.close();
-            logger.info(path+"保存成功");
+            logger.info(path+"保存成功\n");
+        } catch (Exception e){
+            logger.info(path + "保存失败\n");
         }
-        catch (Exception e){logger.info(path + "保存失败");}
     }
 
     //创建一个Excel
@@ -221,10 +222,10 @@ public class ExcelUtils {
             // 创建一个工作薄对象
             HSSFSheet sheet = workBook.createSheet("Sheet1");
             // 设置列的宽度为
-            sheet.setColumnWidth(0,4000);
+            sheet.setColumnWidth(0,8000);
             sheet.setColumnWidth(1,6000);
             sheet.setColumnWidth(2,8000);
-            sheet.setColumnWidth(3,8000);
+            sheet.setColumnWidth(3,6000);
             sheet.setColumnWidth(4,12000);
             sheet.setColumnWidth(5,8000);
             sheet.setColumnWidth(6,10000);

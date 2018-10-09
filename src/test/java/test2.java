@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class test2 {
+public class test2 extends InitTest{
     @Test
     public void testpostcode(){
         BaseCase baseCase=new BaseCase();

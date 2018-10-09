@@ -5,13 +5,13 @@
 
     <test name="测试">
         <classes>
-            <class name="test4"></class>
             <class name="test2"></class>
         </classes>
     </test>
 
-    <listeners>
-        <listener class-name="TestReport.ExtentReporterListener"></listener>
-    </listeners>
+    <!--<listeners>-->
+        <!--<listener class-name="TestReport.ExtentReporterListener"></listener>-->
+    <!--</listeners>-->
 
 </suite>
+

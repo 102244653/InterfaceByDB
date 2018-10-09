@@ -3,6 +3,8 @@ package Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+
 public class CutStrUtils {
 
     private static Logger logger = LoggerFactory.getLogger(CutStrUtils.class);
@@ -121,13 +123,43 @@ public class CutStrUtils {
 
     //按照指定符号截取
     public String[] CutByIndex(String str,String index){
-        if(str!=null && str.contains(index)){
+        if(str.isEmpty()){ return null; }
+        if(str.contains(index)){
             int key=str.trim().indexOf(index);
             String[] result=new String[2];
             result[1]=str.substring(0,key);
             result[2]=str.substring(key+1);
             return result;
+        }else {
+            String[] result={str};
+            return result;
         }
-        return null;
+    }
+
+    //分割字符串
+    public String[] SplitByIndex(String str,String index){
+        if(str.isEmpty()){ return null;}
+        if(str.contains(index)){
+            String[]  strs=str.split(index);
+            return strs;
+        }else {
+            String[] result={str};
+            return result;
+        }
+    }
+
+    //统计字符串中某个字符的个数
+    public int count(String str,char index){
+        //将字符串转化为字符数组
+        char[] chars = str.toCharArray();
+        int x=0;
+        for(int i=0;i<chars.length;i++){
+            //逐个依次比较
+            char C=chars[i];
+            if(index==C){
+                x++;
+            }
+        }
+        return x;
     }
 }

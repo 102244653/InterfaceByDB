@@ -11,11 +11,14 @@
                 <!-- 1.加载数据库驱动 -->
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
                 <!-- 2.数据库连接地址 -->
-                <property name="url" value="jdbc:mysql://110.22.00.000:33/test"/>
+                <!--<property name="url" value="jdbc:mysql://117.50.2.144:3306/test"/>-->
+                <property name="url" value="jdbc:mysql://127.0.0.1:3366/apitest"/>
                 <!-- 数据库用户... -->
-                <property name="username" value="username"/>
+                <!--<property name="username" value="es_user"/>-->
+                <property name="username" value="root"/>
                 <!-- 数据库密码... -->
-                <property name="password" value="password"/>
+                <!--<property name="password" value="dHP2fLd)sj$vUD"/>-->
+                <property name="password" value="147852"/>
             </dataSource>
         </environment>
     </environments>
