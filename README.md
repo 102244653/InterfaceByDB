@@ -86,7 +86,7 @@
     
     ⑥ExpectResult==预期结果
     
-    ⑦ISDO==用例是否有效
+    ⑦Effective==用例是否有效
 
 数据库用例表结构示例：
     
@@ -95,7 +95,7 @@
     | 用例编号 |   用例名称 |      请求方式    |   用户名  |   密码    | 用户类型 |    预期结果   |  用例是否有效 | 
     |   ID    |  CaseName  |  RequestMethod  | uasername | password |  type   |  ExpectResult |   Effective  |
     
-        1     正确账号密码登录      post         zhangsan    123456       1           success           T
+        1     正确账号密码登录      post         zhangsan    123456       1     equals[success,1]       T
 
 
 五、编写测试Case：
