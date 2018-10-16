@@ -140,7 +140,7 @@
     3.断言字典如下：
         equals  ---  等于
         contain ---  包含
-        length  ---  长度等于
+        length  ---  长度等于（未具体实现）
         start   ---  以value开头
         end     ---  以value结尾
 
