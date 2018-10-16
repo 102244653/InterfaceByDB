@@ -1,3 +1,5 @@
+package TestDemo;
+
 import CaseData.MyInfo;
 import Utils.DatabaseUtil;
 import org.apache.ibatis.session.SqlSession;
@@ -15,4 +17,6 @@ public class test3 {
         int a=sql.selectOne("count");
         System.out.println(a);
     }
+
+
 }

@@ -6972,7 +6972,7 @@
                     width: 200px;
                 }
                 #detailBody > tr > td:nth-child(3){
-                    width: 400px;
+                    width: 350px;
                 }
                 #detailBody > tr > td:nth-child(4){
                     width: 100px;

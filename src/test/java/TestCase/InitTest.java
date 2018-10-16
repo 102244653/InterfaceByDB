@@ -1,3 +1,5 @@
+package TestCase;
+
 import TestReport.InitExcelReport;
 import TestReport.InitHtmlReport;
 import org.testng.annotations.AfterSuite;

@@ -1,10 +1,12 @@
+package TestDemo;
+
 import BaseCase.BaseCase;
-import HttpUtils.HttpUtil;
+import TestCase.InitTest;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class test2 extends InitTest{
+public class test2 extends InitTest {
     @Test
     public void testpostcode(){
         BaseCase baseCase=new BaseCase();

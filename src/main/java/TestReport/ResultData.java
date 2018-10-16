@@ -47,7 +47,7 @@ public class ResultData {
                     "\"requestbody\":\""+data[4]+ "\",\n" +
                     "\"excepct\":\""+data[5]+ "\",\n" +
                     "\"result\":\""+result+ "\",\n" +
-                    "\"log\":[\""+data[6].replaceAll("\"","'")+ "\"]\n" +
+                    "\"log\":[`"+data[6].replaceAll("\"","'")+ "`]\n" +
                     "}\n";
         }
         return json.trim();

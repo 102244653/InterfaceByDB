@@ -36,7 +36,4 @@ public class postcode {
         result[5]=ExpectResult;
         return result;
     }
-
-
-
 }

@@ -6,6 +6,7 @@ import TestReport.InitExcelReport;
 import TestReport.ResultData;
 import Utils.ConfigFile;
 import Utils.DatabaseUtil;
+import com.aventstack.extentreports.utils.ExceptionUtil;
 import org.apache.http.client.methods.HttpPost;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,6 +51,7 @@ public class BaseCase {
                     HttpPost httppost=new HttpPost("http://localhost:8899/postdemo");
                 }
                 ResultExcel[6]=response;
+                System.out.println(response);
                 if(CheckResult.checkresult(response,Excepct)){
                     //测试结果
                     ResultExcel[7]="PASS";
@@ -60,7 +62,7 @@ public class BaseCase {
                     ResultData.FailCase.add(ResultExcel[2]);
                 }
             }catch (Exception e){
-                ResultExcel[6]= String.valueOf(e.getStackTrace());
+                ResultExcel[6]= ExceptionUtil.getStackTrace(e);
                 //测试结果
                 ResultExcel[7]="SKIP";
                 ResultData.SkipCase.add(ResultExcel[2]);

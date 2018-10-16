@@ -1,3 +1,4 @@
+package TestDemo;
 
 import BaseCase.BaseCase;
 import CaseData.postcode;
@@ -46,5 +47,7 @@ public class TestDemo {
         postcode casevalue= DatabaseUtil.getSqlSession().selectOne("postcode",1);
         System.out.println(casevalue);
     }
+
+
 
 }

@@ -13,7 +13,4 @@ public class MyInfo {
     public String toString(){
         return "{id:"+id+","+ "userName:"+id+","+ "password:"+name+","+ "age:"+age+","+ "sex:"+mydesc+"}";
     }
-
-
-    
 }
