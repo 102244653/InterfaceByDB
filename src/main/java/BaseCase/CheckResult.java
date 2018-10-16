@@ -39,7 +39,7 @@ public class CheckResult {
             }
             switch (type.trim()){
                 case "equals":
-                    //try {
+                    try {
                         String _value1= (String) mapresult.get(key);
                         if(!_value1.equals(except)){
                             countflag++;
@@ -47,9 +47,9 @@ public class CheckResult {
                         }else {
                             logger.info(text+"  结果校对正确");
                         }
-//                    }catch (Exception e){
-//                        //throw new Exception("预期结果断言错误："+text);
-//                    }
+                    }catch (Exception e){
+                        throw new Exception("预期结果断言错误："+text);
+                    }
                     break;
                 case "contain":
                     try {
