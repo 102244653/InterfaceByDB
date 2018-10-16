@@ -132,12 +132,17 @@
 六、结果断言：
     
     预期结果的格式：
-    
     比较方式[字段名：预期结果];比较方式[字段名：预期结果] 
     例： contain[key：vlaue];equals[key：vlaue]
     
     1.可自定义支持结果长度的比较，需要根据实际情况在AnylistJson类修改getsize（）方法即可
     2.同时支持多个字段的校验，使用 ; 分隔即可
+    3.断言字典如下：
+        equals  ---  等于
+        contain ---  包含
+        length  ---  长度等于
+        start   ---  以value开头
+        end     ---  以value结尾
 
 七、ExcelReport数据结构：
 
