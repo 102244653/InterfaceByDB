@@ -13,7 +13,7 @@ public class CheckResult {
 
     private static Logger logger = LoggerFactory.getLogger(CheckResult.class);
     /**
-     * object格式：比较方式[字段名：预期结果]  ==  eq[key,vlaue]
+     * object格式：比较方式[字段名：预期结果]  ==  eq[key：vlaue]
      */
     public static boolean checkresult(String response,String exceptresult) throws Exception {
         int countflag=0;
@@ -66,6 +66,32 @@ public class CheckResult {
                     break;
                 case "length":
                     logger.info("length方法暂未实现:请更具实际情况扩展");
+                    break;
+                case "start":
+                    try {
+                        String _value2= (String) mapresult.get(key);
+                        if(!_value2.startsWith(except)){
+                            countflag++;
+                            logger.info(text+"  结果校对错误");
+                        }else {
+                            logger.info(text+"  结果校对正确");
+                        }
+                    }catch (Exception e){
+                        throw new Exception("预期结果断言错误："+text);
+                    }
+                    break;
+                case "end":
+                    try {
+                        String _value2= (String) mapresult.get(key);
+                        if(!_value2.endsWith(except)){
+                            countflag++;
+                            logger.info(text+"  结果校对错误");
+                        }else {
+                            logger.info(text+"  结果校对正确");
+                        }
+                    }catch (Exception e){
+                        throw new Exception("预期结果断言错误："+text);
+                    }
                     break;
                 default:
                     logger.info(text+"  校验类型错误："+type);
