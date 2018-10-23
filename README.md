@@ -179,4 +179,4 @@
     </test>
     </suite>
     
-    执行结束后在TestExcelReport查看Excel报告和TestReport查看html报告
+    执行结束后在TestReport查看Excel报告和TestReport查看html报告
