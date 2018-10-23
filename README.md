@@ -138,8 +138,8 @@
     1.可自定义支持结果长度的比较，需要根据实际情况在AnylistJson类修改getsize（）方法即可
     2.同时支持多个字段的校验，使用 ; 分隔即可
     3.断言字典如下：
-        equals  ---  等于
-        contain ---  包含
+        equals  ---  等于value
+        contain ---  包含value
         length  ---  长度等于（未具体实现）
         start   ---  以value开头
         end     ---  以value结尾
