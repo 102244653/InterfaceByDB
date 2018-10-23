@@ -6,9 +6,9 @@ import org.slf4j.LoggerFactory;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class DateUtils {
+public class DateUtil {
 
-    private static Logger logger = LoggerFactory.getLogger(DateUtils.class);
+    private static Logger logger = LoggerFactory.getLogger(DateUtil.class);
 
     public static final String COMMON_DATE_FORMAT = "yyyy-MM-dd";
 

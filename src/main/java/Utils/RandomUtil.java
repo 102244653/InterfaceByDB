@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Random;
 
-public class RandomUtils {
-    private static Logger logger = LoggerFactory.getLogger(RandomUtils.class);
+public class RandomUtil {
+    private static Logger logger = LoggerFactory.getLogger(RandomUtil.class);
     /**
      * 生成随机数字,
      *

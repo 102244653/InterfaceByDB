@@ -4,6 +4,7 @@ import CaseData.postcode;
 import HttpUtils.HttpUtil;
 import TestReport.InitExcelReport;
 import TestReport.ResultData;
+import Utils.CheckResult;
 import Utils.ConfigFile;
 import Utils.DatabaseUtil;
 import com.aventstack.extentreports.utils.ExceptionUtil;
@@ -19,7 +20,7 @@ public class BaseCase {
     public String[] ResultExcel;
 
     public void executecase(String caseqty,String casename)throws IOException{
-        String TestUrl= ConfigFile.getUrl("test.url");
+        String TestUrl= ConfigFile.getUrl("test.url");//读取测试地址
         //读取用例总数
         int qty=DatabaseUtil.getSqlSession().selectOne(caseqty);
         for(int i=1;i<=qty;i++){
@@ -51,7 +52,6 @@ public class BaseCase {
                     HttpPost httppost=new HttpPost("http://localhost:8899/postdemo");
                 }
                 ResultExcel[6]=response;
-                System.out.println(response);
                 if(CheckResult.checkresult(response,Excepct)){
                     //测试结果
                     ResultExcel[7]="PASS";
@@ -67,11 +67,9 @@ public class BaseCase {
                 ResultExcel[7]="SKIP";
                 ResultData.SkipCase.add(ResultExcel[2]);
             }
-            InitExcelReport.InsertData(ResultExcel);
-            ResultData.AllCase.add(ResultExcel);
+            InitExcelReport.InsertData(ResultExcel);//插入excel报告结果
+            ResultData.AllCase.add(ResultExcel);//插入html报告结果
         }
     }
-
-
 
 }

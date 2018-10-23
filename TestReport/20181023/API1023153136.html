@@ -1,12 +1,13 @@
 <html>
 <head>
+    <!--<https://www.staticfile.org/  &#45;&#45;下载样式文件地址>-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> 自 动 化 测 试 报 告 </title>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/chosen/1.8.2/chosen.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/chosen/1.8.2/chosen.css" rel="stylesheet">
     <base target="_blank">
     <style type="text/css">
         h1, h2, h3, h4, h5, h6 {
@@ -6972,7 +6973,7 @@
                     width: 200px;
                 }
                 #detailBody > tr > td:nth-child(3){
-                    width: 400px;
+                    width: 350px;
                 }
                 #detailBody > tr > td:nth-child(4){
                     width: 100px;
@@ -7109,10 +7110,10 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="https://cdn.bootcss.com/echarts/3.8.5/echarts.min.js"></script>
-<script src="https://cdn.bootcss.com/chosen/1.8.2/chosen.jquery.js"></script>
+<script src="https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.staticfile.org/echarts/4.2.0-rc.1/echarts.min.js"></script>
+<script src="https://cdn.staticfile.org/chosen/1.8.2/chosen.jquery.js"></script>
 <script type="text/javascript">
 	function $childNode(o) {
 	    return window.frames[o]
@@ -7158,14 +7159,14 @@
 "testPass":3,
 "testSkip":0,
 "testFail":0,
-"totalTime":"2018年10月09日 17:22:21",
+"totalTime":"2018年10月23日 15:31:40",
 "testResult":[{"apiname":"PostCode",
 "casename":"正确的查询",
 "requesttype":"get",
 "requestbody":"?app=life.postcode&postcode=528400&appkey=36924&sign=293d6ebc708eb5f1df1559806fd915d8&format=json",
-"excepct":"equals[success,1];equals[simcall,中国,广东,中山]",
+"excepct":"equals[success:1];contain[lists:中国,广东,中山]",
 "result":"成功",
-"log":["{'success':'1','result':{'count':'1','lists':[{'areaid':'242','postcode':'528400','areacode':'0760','areanm':'中华人民共和国,广东省,中山市','simcall':'中国,广东,中山'}]}}"]
+"log":[`{'success':'1','result':{'count':'1','lists':[{'areaid':'242','postcode':'528400','areacode':'0760','areanm':'中华人民共和国,广东省,中山市','simcall':'中国,广东,中山'}]}}`]
 }
 ,
 
@@ -7173,9 +7174,9 @@
 "casename":"错误的查询",
 "requesttype":"get",
 "requestbody":"?app=life.postcode&postcode=52840&appkey=36294&sign=293d6ebc708eb5f1df1559806fd915d8&format=json",
-"excepct":"equals[success,0]",
+"excepct":"equals[success:0]",
 "result":"成功",
-"log":["{'success':'0','msgid':'1000553','msg':'sign效验失败'}"]
+"log":[`{'success':'0','msgid':'1000553','msg':'sign效验失败'}`]
 }
 ,
 
@@ -7183,9 +7184,9 @@
 "casename":"跳过用例",
 "requesttype":"get",
 "requestbody":"?app=life.postcode&postcode=52840&appkey=&sign=293d6ebc708eb5f1df1559806fd915d8&format=json",
-"excepct":"equals[success,0]",
+"excepct":"equals[success:0]",
 "result":"成功",
-"log":["{'success':'0','msgid':'1000555','msg':'Parameter appkey or sign invalid.'}"]
+"log":[`{'success':'0','msgid':'1000555','msg':'Parameter appkey or sign invalid.'}`]
 }]
 };
 
@@ -7326,10 +7327,10 @@
                         radius: '55%',
                         center: ['50%', '60%'],
                         data: [
-                            {value: resultData["testFail"], name: '失败'},
-                            {value: resultData["testSkip"], name: '跳过'},
-                            {value: resultData["testPass"], name: '成功'}
-                        ],
+                            {value: resultData["testFail"], name: '失败' ,itemStyle:{color:"red"}},
+                            {value: resultData["testSkip"], name: '跳过' ,itemStyle:{color:"orange"}},
+                            {value: resultData["testPass"], name: '成功' ,itemStyle:{color:"green"}}
+                        ].filter(v => v.value > 0),
                         itemStyle: {
                             emphasis: {
                                 shadowBlur: 10,

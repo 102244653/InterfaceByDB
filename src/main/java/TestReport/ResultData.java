@@ -1,10 +1,10 @@
 package TestReport;
 
 import Utils.ConfigFile;
-import Utils.DateUtils;
+import Utils.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,15 +12,16 @@ import java.util.List;
 public class ResultData {
 
     private static Logger logger = LoggerFactory.getLogger(ResultData.class);
-    public static List<String[]> AllCase = new ArrayList<String[]>();
+    public static List<String[]> AllCase = new ArrayList<String[]>();//所有测试结果集合
 
-    public static List<String> PassCase=new ArrayList<String>();
+    public static List<String> PassCase=new ArrayList<String>();//成功的用例
 
-    public static List<String> FailCase=new ArrayList<String>();
+    public static List<String> FailCase=new ArrayList<String>();//失败的用例
 
-    public static List<String> SkipCase=new ArrayList<String>();
+    public static List<String> SkipCase=new ArrayList<String>();//未执行的用例
 
 
+    //将结果转成html报告所需要的json格式
     public static String ListToJson(){
         if(AllCase.isEmpty()){
             return null;
@@ -61,7 +62,7 @@ public class ResultData {
                 "\"testPass\":"+PassCase.size()+",\n"+
                 "\"testSkip\":"+SkipCase.size()+",\n"+
                 "\"testFail\":"+FailCase.size()+",\n"+
-                "\"totalTime\":\""+DateUtils.format(DateUtils.ZH_DATE_FORMAT)+"\",\n"+
+                "\"totalTime\":\""+ DateUtil.format(DateUtil.ZH_DATE_FORMAT)+"\",\n"+
                 "\"testResult\":["+ListToJson()+"]\n" +
                 "}";
         return  resultdata;

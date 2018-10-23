@@ -3,20 +3,19 @@ package Utils;
 import java.io.*;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.CellRangeAddress;
-import org.apache.poi.hssf.util.HSSFColor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class ExcelUtils {
+public class ExcelUtil {
 
-    private static Logger logger = LoggerFactory.getLogger(ExcelUtils.class);
+    private static Logger logger = LoggerFactory.getLogger(ExcelUtil.class);
 
     HSSFSheet sheet;
     HSSFCellStyle style0;
     HSSFFont font0;
     //创建excel工作对象
-    public ExcelUtils(String path, String sheetname){
+    public ExcelUtil(String path, String sheetname){
         try {
             //创建workbook
             File file = new File(path);
@@ -33,7 +32,7 @@ public class ExcelUtils {
         }
     }
 
-    public ExcelUtils()
+    public ExcelUtil()
     {
     }
 
@@ -41,12 +40,12 @@ public class ExcelUtils {
     public String readFromExcelCell(int rowIndex, int cellIndex){
         HSSFRow row = sheet.getRow(rowIndex);
         if (row == null) {
-            logger.error("第"+rowIndex+"行不存在");
+            //logger.error("第"+rowIndex+"行不存在");
             return  null;
         }
         HSSFCell cell = row.getCell(cellIndex);
         if (cell == null) {
-            logger.error("第"+cellIndex+"列不存在");
+            //logger.error("第"+cellIndex+"列不存在");
             return  null;
         }
         int cellType = cell.getCellType();
@@ -74,7 +73,7 @@ public class ExcelUtils {
     public String[] readFromExcelrow(int rowIndex) {
         HSSFRow row = sheet.getRow(rowIndex);
         if (row == null) {
-            logger.error("第"+rowIndex+"行不存在");
+            //logger.error("第"+rowIndex+"行不存在");
             return  null;
         }
         String[] result=new String[row.getLastCellNum()];
@@ -110,12 +109,12 @@ public class ExcelUtils {
         for (int k=0;k<rowid;k++){
             HSSFRow row = sheet.getRow(k);
             if (row == null) {
-                logger.error("第"+k+"行不存在");
+                //logger.error("第"+k+"行不存在");
                 return  null;
             }
             HSSFCell cell = row.getCell(columnIndex);
             if (cell == null) {
-                logger.error("第"+columnIndex+"列不存在");
+                //logger.error("第"+columnIndex+"列不存在");
                 return  null;
             }
             int cellType = cell.getCellType();
@@ -149,13 +148,13 @@ public class ExcelUtils {
         //判断行是否存在
         if (row == null) {
             row = sheet.createRow(rowIndex);
-            logger.info("行号不存在，新建行"+rowIndex);
+            //logger.info("行号不存在，新建行"+rowIndex);
         }
         HSSFCell cell = row.getCell(cellIndex);
         //判断列是否存在
         if (cell == null) {
             cell = row.createCell(cellIndex);
-            logger.info("单元格不存在，新建单元格["+rowIndex+"."+cellIndex+"]");
+            //logger.info("单元格不存在，新建单元格["+rowIndex+"."+cellIndex+"]");
         }
         cell.setCellValue(value);
         logger.info("单元格["+rowIndex+"."+cellIndex+"]成功写入信息："+value);
@@ -207,9 +206,9 @@ public class ExcelUtils {
             excelFileOutPutStream.flush();
             // 使用后，及时关闭这个输出流对象， 好习惯，再强调一遍！
             excelFileOutPutStream.close();
-            logger.info(path+"保存成功\n");
+            logger.info(path+"  保存成功\n");
         } catch (Exception e){
-            logger.info(path + "保存失败\n");
+            logger.info(path + "  保存失败\n");
         }
     }
 
@@ -235,7 +234,6 @@ public class ExcelUtils {
             //表头信息--整行合并
             if(title.isEmpty()){
                 rowdata= sheet.createRow(0);// 创建一个行对象
-
             }else {
                 rowtitle= sheet.createRow(0);//创建表头信息行
                 rowdata = sheet.createRow(1);// 创建一个行对象

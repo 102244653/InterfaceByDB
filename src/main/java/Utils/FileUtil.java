@@ -5,9 +5,9 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
-public class FileUtils {
+public class FileUtil {
 
-    private static Logger logger = LoggerFactory.getLogger(FileUtils.class);
+    private static Logger logger = LoggerFactory.getLogger(FileUtil.class);
 
     /**
      * 判断文件是否存在

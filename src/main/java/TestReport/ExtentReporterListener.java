@@ -22,7 +22,7 @@ public class ExtentReporterListener implements IReporter {
     private static Logger logger = LoggerFactory.getLogger(ExtentReporterListener.class);
     //生成的路径以及文件名
     private static final String OUTPUT_FOLDER = "TestReport/";
-    private static final String FILE_NAME = "index.html";
+    private static final String FILE_NAME = "report.html";
 
     private ExtentReports extent;
 

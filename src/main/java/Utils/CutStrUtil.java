@@ -3,11 +3,9 @@ package Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
+public class CutStrUtil {
 
-public class CutStrUtils {
-
-    private static Logger logger = LoggerFactory.getLogger(CutStrUtils.class);
+    private static Logger logger = LoggerFactory.getLogger(CutStrUtil.class);
 //    subStrStart(String str, int end);//正向截取
 //    subStrEnd(String str, int start);//反向截取
 //    subStr(String str, int length);//支持双向截取，length>0正向截取，<0，反向截取

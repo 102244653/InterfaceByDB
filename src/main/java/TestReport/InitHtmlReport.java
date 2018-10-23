@@ -1,22 +1,23 @@
 package TestReport;
 
-import Utils.DateUtils;
+import Utils.DateUtil;
 
 import java.io.*;
 
 public class InitHtmlReport {
     private static final String OUTPUT_FOLDER = "./TestReport/";
-    public static String dirc= DateUtils.format(DateUtils.CHECK_LOG_FORMAT);
+    public static String dirc= InitExcelReport.dirc;
     private static final String FILE_NAME ="API"+InitExcelReport.ExcelName+".html";
     //报告模板存放地址
-    private String templatePath = System.getProperty("user.dir")+"\\src\\main\\resources\\reportdemo";
+    private String templatePath = System.getProperty("user.dir")+"/src/main/resources/reportdemo";
     //报告存放地址
-    private String Reportpath =OUTPUT_FOLDER+"\\"+dirc+"\\"+FILE_NAME;
+    private String Reportpath =OUTPUT_FOLDER+"/"+dirc+"/"+FILE_NAME;
+    //private String Reportpath =OUTPUT_FOLDER+"index.html";
 
     public  void CreatHtmlReport(){
         try {
             String template = this.read(templatePath);
-            File dir = new File(OUTPUT_FOLDER+"\\"+dirc);
+            File dir = new File(OUTPUT_FOLDER+"/"+dirc);
             if (!dir.exists())
             {dir.mkdirs();}
             BufferedWriter output = new BufferedWriter( new OutputStreamWriter(new FileOutputStream(new File(Reportpath)),"UTF-8"));
