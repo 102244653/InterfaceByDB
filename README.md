@@ -1,4 +1,4 @@
-# Data driving for interface testing[接口测试：数据驱动]
+# Data driving for interface testing[接口测试之数据驱动]
 一、简介：
 
 1、使用java发起http/https请求测试接口，快速稳定
