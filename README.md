@@ -1,17 +1,17 @@
 # ApiDBTest[接口自动化测试]
 一、简介：
 
-1、使用mybatis在数据库维护接口测试用例
+1、使用java发起http/https请求测试接口，快速稳定
 
-2、使用java发起http/https请求测试接口
+2、应用mybatis框架，将测试用例放在数据库维护，方便小组成员共同参与
 
-3、同时生成html和Excel测试报告
+3、同时生成html和Excel测试报告，报告内容详细清晰，错误日志一目了然
 
-4、直接部署在jenkins平台自动测试
+4、方便直接部署在jenkins平台自动测试，一键执行测试用例，还可定时执行
 
-5、持续维护测试用例，随时新增用例，仅执行有效用例
+5、支持随时更新/增加测试用例，无需修改代码，可定向设置用例的有效性
 
-6、数据库维护测试套件，无需改动代码，全程数据库操作，使用简单
+6、直接在数据库维护测试套件，可定向测试单个接口或者单条用例，使用简单
 
 二、编写接口参数类：
 
@@ -43,7 +43,7 @@
 
     }
 
-    //组装报告的结果数组
+    //组装报告的结果数组(此方法由于使用频率极高，故建议写成公共方法)
     public String[] Result(){
         String[] result =new String[8];
         result[0]= ConfigFile.getUrl("test.url");
@@ -155,8 +155,8 @@
     
     1.新建测试套件表suitcase：
        public int id;
-        public String casename;//接口名称查询sql的id
-        public String caseqty;//接口对应的用例数量查询sql的id
+        public String casename;//查询接口名称的sql的id
+        public String caseqty;//查询接口对应的用例数量的sql的id
         public String effictive;//是否执行该接口用例
 
          @Override
@@ -169,7 +169,6 @@
      
      3.通过StartTest方法一键执行所有用例
         
-
 
 八、ExcelReport数据结构：
 
@@ -220,7 +219,10 @@
 
     mkdir  在tomcat目录的webapps/ROOT下创建/$result文件夹
 
-    cp /root/.jenkins/workspace/项目名称/报告地址   /$result地址
+    cp /root/.jenkins/workspace/项目名称/TestReport/index.html   ./webapps/ROOT/$result/index.html
+    
+    最后使用链接即可访问测试报告：
+    http://IP:端口/result/index.html
     
 十一、执行结束后可使用插件自动发送邮件：
 
