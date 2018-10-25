@@ -2,6 +2,10 @@ package CaseData;
 import Utils.ConfigFile;
 import lombok.Data;
 
+/**
+*postcode接口表
+*/
+
 @Data
 public class postcode {
     public int ID;

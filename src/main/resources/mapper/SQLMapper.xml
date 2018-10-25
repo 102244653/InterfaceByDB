@@ -3,29 +3,32 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="CaseData">
-    <select id="MyInfo" parameterType="Integer" resultType="CaseData.MyInfo">
-        select * from myinfo WHERE id=#{id};
+
+    <!--<查询测试套件中需要执行的接口数量>-->
+    <select id="Tsuit"  resultType="Integer">
+        select count(*) from suitcase where effictive="T";
     </select>
-
-    <select id="count"  resultType="Integer">
-        select count(*) from myinfo;
+    <!--<查询测试套件中的接口总数量>-->
+    <select id="allsuit"  resultType="Integer">
+        select count(*) from suitcase ;
     </select>
-
-    <select id="postcase" parameterType="Integer" resultType="CaseData.post">
-        select * from post WHERE id=#{id};
+    <!--<查询测试套件中需要执行的接口参数值>-->
+    <select id="casesuit" parameterType="Integer" resultType="CaseData.suitcase">
+        select * from suitcase where ID=#{id};
     </select>
+    <!--<以上类容不可更改，下面的sql根据接口自定义>-->
 
-    <select id="countpost"  resultType="Integer">
-        select count(*) from post;
-    </select>
+    <!--<select id="MyInfo" parameterType="Integer" resultType="CaseData.MyInfo">-->
+    <!--select * from myinfo WHERE id=#{id};-->
+    <!--</select>-->
 
+    <!--<select id="count"  resultType="Integer">-->
+    <!--select count(*) from myinfo;-->
+    <!--</select>-->
 
-    <insert id="add" parameterType="CaseData.MyInfo">
-        insert into
-        myinfo(id,name,age,desca)
-        values
-        (#{id},#{name},#{age},#{desc});
-    </insert>
+    <!--<select id="postcase" parameterType="Integer" resultType="CaseData.post">-->
+    <!--select * from post WHERE id=#{id};-->
+    <!--</select>-->
 
     <select id="postcodecount"  resultType="Integer">
          select count(*) from postcode;
@@ -36,3 +39,4 @@
     </select>
 
 </mapper>
+
