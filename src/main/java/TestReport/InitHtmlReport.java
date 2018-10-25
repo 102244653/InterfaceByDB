@@ -11,8 +11,8 @@ public class InitHtmlReport {
     //报告模板存放地址
     private String templatePath = System.getProperty("user.dir")+"/src/main/resources/reportdemo";
     //报告存放地址
-    private String Reportpath =OUTPUT_FOLDER+"/"+dirc+"/"+FILE_NAME;
-    //private String Reportpath =OUTPUT_FOLDER+"index.html";
+    //private String Reportpath =OUTPUT_FOLDER+"/"+dirc+"/"+FILE_NAME;
+    private String Reportpath =OUTPUT_FOLDER+"index.html";
 
     public  void CreatHtmlReport(){
         try {
