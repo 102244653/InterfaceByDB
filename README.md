@@ -104,26 +104,30 @@
     
     public class InitTest {
 
-    @BeforeSuite
+    @BeforeTest
     public void beforetest(){
         InitExcelReport.InitExcel();
     }
 
-    @AfterSuite
+    @AfterTest
     public void aftertest(){
         new InitHtmlReport().CreatHtmlReport();
     }
     }
     
     用于执行的Case类,调用BaseCase基类处理数据、执行用例、记录结果：
-    public class Case extends InitTest{
-    @Test
-    public void TestPostCode(){
+    
+    public class StartTest extends InitTest{
+
+    private static Logger logger = LoggerFactory.getLogger(StartTest.class);
+
+    @Test(dataProvider="TestData",dataProviderClass= DataSource.class)
+    public  void StartTest(String caseqty ,String casename){
         BaseCase baseCase=new BaseCase();
         try {
-            baseCase.executecase("postcodecount","postcode");
+            baseCase.executecase(caseqty,casename);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("\n本次测试执行过程中出现异常，具体原因如下：\n\n"+ ExceptionUtil.getStackTrace(e));
         }
     }
     }
@@ -142,9 +146,29 @@
         contain ---  包含value
         length  ---  长度等于（未具体实现）
         start   ---  以value开头
-        end     ---  以value结尾
+        end     ---  以value结尾       
 
-七、ExcelReport数据结构：
+七、使用testng数据驱动从数据库直接读取测试套件，避免反复修改testng.xml：
+    
+    1.新建测试套件表suitcase：
+       public int id;
+        public String casename;//接口名称查询sql的id
+        public String caseqty;//接口对应的用例数量查询sql的id
+        public String effictive;//是否执行该接口用例
+
+         @Override
+        public String toString(){
+        return "编号:"+id+",测试接口名称:"+casename+",接口用例数量:"+caseqty+",本次是否执行(T-执行/F-不执行):"+effictive;
+        }
+        
+        
+     2.在/TestCase/DataSource下使用数据驱动读取测试套件表，返回规定的object[][]格式参数，驱动测试执行
+     
+     3.通过StartTest方法一键执行所有用例
+        
+
+
+八、ExcelReport数据结构：
 
     ①ID==用例编号（从1自增）
     
@@ -164,7 +188,7 @@
     
     ⑨每条用例执行结束后组装ExccelReport和HtnlReport数据，并写入结果
     
-八、执行用例：
+九、执行用例：
 
     【先读取用例总数，然后for（）循环执行用例】
     使用testng.xml文件配置要执行的用例，在持续平台上直接执行testng.xml文件即可：
@@ -174,7 +198,7 @@
     <suite name="API自动化测试" >
     <test name="测试">
         <classes>
-            <class name="test2"></class>
+            <class name="TestCase.StartTest"></class>
         </classes>
     </test>
     </suite>
