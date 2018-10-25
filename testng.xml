@@ -5,7 +5,7 @@
 
     <test name="测试">
         <classes>
-            <class name="test2"></class>
+            <class name="TestCase.StartTest"></class>
         </classes>
     </test>
 
