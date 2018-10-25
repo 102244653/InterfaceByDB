@@ -125,6 +125,7 @@
     public  void StartTest(String caseqty ,String casename){
         BaseCase baseCase=new BaseCase();
         try {
+        【先读取用例总数，然后for（）循环执行用例】
             baseCase.executecase(caseqty,casename);
         } catch (IOException e) {
             logger.error("\n本次测试执行过程中出现异常，具体原因如下：\n\n"+ ExceptionUtil.getStackTrace(e));
@@ -188,11 +189,10 @@
     
     ⑨每条用例执行结束后组装ExccelReport和HtnlReport数据，并写入结果
     
-九、执行用例：
-
-    【先读取用例总数，然后for（）循环执行用例】
-    使用testng.xml文件配置要执行的用例，在持续平台上直接执行testng.xml文件即可：
+九、部署jenkins持续集成环境,执行用例：
     
+    jenkins部署自行百度，部署好新建基于maven的任务，执行指定的testng.xml文件即可：
+
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
     <suite name="API自动化测试" >
@@ -204,3 +204,25 @@
     </suite>
     
     执行结束后在TestReport查看Excel报告和TestReport查看html报告
+    
+    
+ 十、部署测试报告小平台：
+ 
+    在jenkins服务器上搭建一个tomcat环境，然后在jenkins上通过shell脚本将每次执行的报告拷贝至/webapps/ROOT目录下，则
+    可通过链接查看测试报告：
+    
+    shell命令参考（百度可查）：
+    
+    result=$(curl -s http://ip:端口/job/项目名称/lastBuild/buildNumber  --user 用户名：密码)   --result 即jenkins任务执行编号，据
+    此创建文件夹
+
+    mkdir  在tomcat目录的webapps/ROOT下创建/$result文件夹
+
+    cp /root/.jenkins/workspace/项目名称/报告地址   /$result地址
+    
+十一、执行结束后可使用插件自动发送邮件：
+
+    1.jenkins发送邮件可自行百度
+    
+    2.亦可新建任务自己通过脚本实现邮件发送
+    
