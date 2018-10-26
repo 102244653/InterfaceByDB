@@ -167,7 +167,13 @@
         
      2.在/TestCase/DataSource下使用数据驱动读取测试套件表，返回规定的object[][]格式参数，驱动测试执行
      
-     3.通过StartTest方法一键执行所有用例
+     3.新建testurl表（一个字段即可），指定当前的测试所需要读取的测试环境：
+        测试环境配置在/resource/application.properties中配置
+        SIT--测试环境
+        UAT--验收环境
+        PRO--生产环境
+     
+     4.通过StartTest方法一键执行所有用例
         
 
 八、ExcelReport数据结构：
