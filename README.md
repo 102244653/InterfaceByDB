@@ -100,9 +100,26 @@
         1     正确账号密码登录      post         zhangsan    123456       1     equals[success,1]       T
 
 
-五、编写测试Case：
+五、新增接口后编写CASE:
+    
+    在BaseCase目录下的CaseUtil文件中修改getcasedata方法即可：
+    
+    创建一个接口类对象勇于接受测试用例数据，然后给BaseCase对象赋值执行用例
+    
+        BaseCase casedata=new BaseCase();
+        if (casename.equals("postcode")){
+            postcode casevalue= DatabaseUtil.getSqlSession().selectOne("postcode",i);
+            casedata.setRequest(casevalue.toString()); //请求参数
+            casedata.setType(casevalue.getRequestMethod().trim().toLowerCase()); //读取请求类型
+            casedata.setExcepct(casevalue.getExpectResult().trim()); //读取预期结果
+            casedata.setIsdo(casevalue.getEffective().trim());//是否执行用例
+            casedata.setResultExcel(casevalue.Result());//Excel报告结果
+        }
 
-    InitTest用于生成报告，Case类需继承它：
+
+    调用基类BaseCase执行用例并梳理测试流程：
+
+    1.InitTest用于生成报告，Case类需继承它：
     
     public class InitTest {
 
@@ -117,7 +134,7 @@
     }
     }
     
-    用于执行的Case类,调用BaseCase基类处理数据、执行用例、记录结果：
+    2.StartTest用于执行用例,调用BaseCase基类处理数据、执行用例、记录结果：
     
     public class StartTest extends InitTest{
 
