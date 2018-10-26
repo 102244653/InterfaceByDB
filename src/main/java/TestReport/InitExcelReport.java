@@ -15,7 +15,7 @@ public class InitExcelReport {
     public static String dirc= DateUtil.format(DateUtil.CHECK_LOG_FORMAT);
     public static String ExcelName= DateUtil.format(DateUtil.time8);
     //public static String ExcelPath=OUTPUT_FOLDER+"/"+dirc+"/"+"API"+ExcelName+".xls";
-    public static String ExcelPath=OUTPUT_FOLDER+"/"+dirc+"/"+"report.xls";
+    public static String ExcelPath=OUTPUT_FOLDER+"/"+"report.xls";
     public static String[] meanu={"TestURL","APIName","CaseName","RequestMethod","RequestBody","ExpectResult","ResponseData","Result",};
 
     public static void InitExcel(){
