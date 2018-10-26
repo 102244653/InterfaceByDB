@@ -37,7 +37,10 @@ public class BaseCase {
         try {
             logger.info(casename+"用例["+i+"] : "+basecase.ResultExcel[1]+" | "+basecase.ResultExcel[2]+" | "+basecase.ResultExcel[3]+" | "+basecase.ResultExcel[4]+" | "+basecase.ResultExcel[5]);
             //判断用例是否执行
-            if(basecase.isdo.equals("F")){ return; }
+            if(basecase.isdo.equals("F")){ 
+                logger.error("当前用例不执行\n"); 
+                return;
+            }
             //判断请求类型
             if(basecase.type.equals("get")){
                 response=HttpUtil.GetURL(URL+basecase.request);
