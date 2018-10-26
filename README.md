@@ -1,15 +1,17 @@
-# ApiDBTest[接口自动化测试]
+# Data driving for interface testing[接口测试之数据驱动]
 一、简介：
 
-1、使用mybatis在数据库维护接口测试用例
+1、使用java发起http/https请求测试接口，快速稳定
 
-2、使用java发起http/https请求测试接口
+2、应用mybatis框架，将测试用例放在数据库维护，方便小组成员共同参与
 
-3、同时生成html和Excel测试报告
+3、同时生成html和Excel测试报告，报告内容详细清晰，错误日志一目了然
 
-4、直接部署在jenkins平台自动测试
+4、方便直接部署在jenkins平台自动测试，一键执行测试用例，还可定时执行
 
-5、持续维护测试用例，随时新增用例，仅执行有效用例
+5、支持随时更新/增加测试用例，无需修改代码，可定向设置用例的有效性
+
+6、直接在数据库维护测试套件，可定向测试单个接口或者单条用例，使用简单
 
 二、编写接口参数类：
 
@@ -41,7 +43,7 @@
 
     }
 
-    //组装报告的结果数组
+    //组装报告的结果数组(此方法由于使用频率极高，故建议写成公共方法)
     public String[] Result(){
         String[] result =new String[8];
         result[0]= ConfigFile.getUrl("test.url");
@@ -104,26 +106,31 @@
     
     public class InitTest {
 
-    @BeforeSuite
+    @BeforeTest
     public void beforetest(){
         InitExcelReport.InitExcel();
     }
 
-    @AfterSuite
+    @AfterTest
     public void aftertest(){
         new InitHtmlReport().CreatHtmlReport();
     }
     }
     
     用于执行的Case类,调用BaseCase基类处理数据、执行用例、记录结果：
-    public class Case extends InitTest{
-    @Test
-    public void TestPostCode(){
+    
+    public class StartTest extends InitTest{
+
+    private static Logger logger = LoggerFactory.getLogger(StartTest.class);
+
+    @Test(dataProvider="TestData",dataProviderClass= DataSource.class)
+    public  void StartTest(String caseqty ,String casename){
         BaseCase baseCase=new BaseCase();
         try {
-            baseCase.executecase("postcodecount","postcode");
+        【先读取用例总数，然后for（）循环执行用例】
+            baseCase.executecase(caseqty,casename);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("\n本次测试执行过程中出现异常，具体原因如下：\n\n"+ ExceptionUtil.getStackTrace(e));
         }
     }
     }
@@ -142,9 +149,28 @@
         contain ---  包含value
         length  ---  长度等于（未具体实现）
         start   ---  以value开头
-        end     ---  以value结尾
+        end     ---  以value结尾       
 
-七、ExcelReport数据结构：
+七、使用testng数据驱动从数据库直接读取测试套件，避免反复修改testng.xml：
+    
+    1.新建测试套件表suitcase：
+       public int id;
+        public String casename;//查询接口名称的sql的id
+        public String caseqty;//查询接口对应的用例数量的sql的id
+        public String effictive;//是否执行该接口用例
+
+         @Override
+        public String toString(){
+        return "编号:"+id+",测试接口名称:"+casename+",接口用例数量:"+caseqty+",本次是否执行(T-执行/F-不执行):"+effictive;
+        }
+        
+        
+     2.在/TestCase/DataSource下使用数据驱动读取测试套件表，返回规定的object[][]格式参数，驱动测试执行
+     
+     3.通过StartTest方法一键执行所有用例
+        
+
+八、ExcelReport数据结构：
 
     ①ID==用例编号（从1自增）
     
@@ -164,19 +190,46 @@
     
     ⑨每条用例执行结束后组装ExccelReport和HtnlReport数据，并写入结果
     
-八、执行用例：
-
-    【先读取用例总数，然后for（）循环执行用例】
-    使用testng.xml文件配置要执行的用例，在持续平台上直接执行testng.xml文件即可：
+九、部署jenkins持续集成环境,执行用例：
     
+    jenkins部署自行百度，部署好新建基于maven的任务，执行指定的testng.xml文件即可：
+
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
     <suite name="API自动化测试" >
     <test name="测试">
         <classes>
-            <class name="test2"></class>
+            <class name="TestCase.StartTest"></class>
         </classes>
     </test>
     </suite>
     
     执行结束后在TestReport查看Excel报告和TestReport查看html报告
+    
+    
+ 十、部署测试报告小平台：
+ 
+    在jenkins服务器上搭建一个tomcat环境，然后在jenkins上通过shell脚本将每次执行的报告拷贝至/webapps/ROOT目录下，则
+    可通过链接查看测试报告：
+    
+    shell命令参考（百度可查）：
+    
+    result=$(curl -s http://ip:端口/job/项目名称/lastBuild/buildNumber  --user 用户名：密码)   --result 即jenkins任务执行编号，据
+    此创建文件夹
+
+    mkdir  在tomcat目录的webapps/ROOT下创建/$result文件夹
+
+    cp /root/.jenkins/workspace/项目名称/TestReport/index.html   ./webapps/ROOT/$result/index.html
+    
+    最后使用链接即可访问测试报告：
+    http://IP:端口/result/index.html
+    
+    
+    
+十一、执行结束后可使用插件自动发送邮件：
+
+
+    1.jenkins发送邮件可自行百度
+    
+    2.亦可新建任务自己通过脚本实现邮件发送
+    
