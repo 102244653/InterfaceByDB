@@ -20,9 +20,9 @@ public class InitExcelReport {
 
     public static void InitExcel(){
         ExcelUtil excel=new ExcelUtil();
-        File dir = new File(OUTPUT_FOLDER+"/"+dirc);
-        if (!dir.exists())
-        {dir.mkdirs();}
+//         File dir = new File(OUTPUT_FOLDER+"/"+dirc);
+//         if (!dir.exists())
+//         {dir.mkdirs();}
         excel.CreatExcel(ExcelPath,TitleName,meanu);
         logger.info("测试报告路径："+ExcelPath);
     }
