@@ -17,7 +17,7 @@ public class StartTest extends InitTest{
         BaseCase baseCase=new BaseCase();
         try {
             baseCase.executecase(caseqty,casename);
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.error("\n本次测试执行过程中出现异常，具体原因如下：\n\n"+ ExceptionUtil.getStackTrace(e));
         }
     }

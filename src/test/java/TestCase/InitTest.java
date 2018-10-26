@@ -11,12 +11,21 @@ public class InitTest {
 
     @BeforeTest
     public void beforetest(){
-        InitExcelReport.InitExcel();
+        try {
+            InitExcelReport.InitExcel();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 
     @AfterTest
     public void aftertest(){
-        new InitHtmlReport().CreatHtmlReport();
+        try {
+            new InitHtmlReport().CreatHtmlReport();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

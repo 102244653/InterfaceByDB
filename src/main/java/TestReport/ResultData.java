@@ -1,5 +1,6 @@
 package TestReport;
 
+import CaseData.TestUrl;
 import Utils.ConfigFile;
 import Utils.DateUtil;
 import org.slf4j.Logger;
@@ -54,10 +55,10 @@ public class ResultData {
         return json.trim();
     }
 
-    public static String GetResultData(){
+    public static String GetResultData() throws Exception {
         String resultdata= "{" +
                 "\"testName\":\""+InitExcelReport.TitleName+"\",\n"+
-                "\"testadress\":\""+ ConfigFile.getUrl("test.url")+"\",\n"+
+                "\"testadress\":\""+ TestUrl.TestUrl+"\",\n"+
                 "\"testAll\":"+AllCase.size()+",\n"+
                 "\"testPass\":"+PassCase.size()+",\n"+
                 "\"testSkip\":"+SkipCase.size()+",\n"+

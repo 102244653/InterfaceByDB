@@ -4,6 +4,10 @@
 
 <mapper namespace="CaseData">
 
+    <!--<查询本次执行用例的环境>-->
+    <select id="testurl"  resultType="String">
+        select testurl from testurl ;
+    </select>
     <!--<查询测试套件中需要执行的接口数量>-->
     <select id="Tsuit"  resultType="Integer">
         select count(*) from suitcase where effictive="T";

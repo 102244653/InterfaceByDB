@@ -24,7 +24,7 @@ public class DataSource {
                     logger.error("casesuit表第"+i+"行"+suit.getCasename()+" 用例本次设置为不执行，将自动跳过！");
                     continue;
                 }
-                if(!suit.getCasename().isEmpty() && !suit.getCaseqty().isEmpty()) {
+                if(!suit.getCasename().isEmpty() && !suit.getCaseqty().isEmpty() ) {
                     suitcase[k][0] = suit.caseqty;
                     suitcase[k][1] = suit.casename;
                     k++;
