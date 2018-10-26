@@ -117,9 +117,9 @@
         }
 
 
-    调用基类BaseCase执行用例并梳理测试流程：
+    其他关键类说明：
 
-    1.InitTest用于生成报告，Case类需继承它：
+    1.InitTest用于生成报告，StartTest类需继承它：
     
     public class InitTest {
 
@@ -152,6 +152,8 @@
     }
     }
     
+    3.DataSource使用数据驱动读取需要测试套件内容，驱动测试执行：
+        
     
 六、结果断言：
     
