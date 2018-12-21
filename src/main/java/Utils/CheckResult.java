@@ -20,9 +20,9 @@ public class CheckResult {
         String[] object= new CutStrUtil().SplitByIndex(exceptresult,";");
         for(int i=0;i<object.length;i++){
             String text=object[i];
-            int point1=text.trim().indexOf("{");
+            int point1=text.trim().indexOf("[");
             int point2=text.trim().indexOf(":");
-            int point3=text.trim().indexOf("}");
+            int point3=text.trim().indexOf("]");
             String type="";
             if(point1!=0){
                 type=text.substring(0,point1);
