@@ -10,7 +10,7 @@ public class CheckResult {
 
     private static Logger logger = LoggerFactory.getLogger(CheckResult.class);
     /**
-     * object格式：比较方式{字段名：预期结果}  ==  equals{key:vlaue}
+     * object格式：比较方式[字段名：预期结果]  ==  equals[key:vlaue]
      */
     public static boolean checkresult(String response,String exceptresult) throws Exception {
         int countflag=0;
