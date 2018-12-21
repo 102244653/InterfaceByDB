@@ -39,7 +39,7 @@ public class CheckResult {
                 case "equals":
                     try {
                         //String _value1= (String) mapresult.get(key);
-                        String _value1=GetJsonByJpath.getValueByJPath(key);
+                        String _value1=GetJsonByJpath.getValueByJPath(responseJson,key);
                         if(!_value1.equals(except)){
                             countflag++;
                             logger.info(text+"  结果校对错误");
@@ -53,7 +53,7 @@ public class CheckResult {
                 case "contain":
                     try {
                          //String _value2= (String) mapresult.get(key);
-                         String _value2=GetJsonByJpath.getValueByJPath(key);
+                         String _value2=GetJsonByJpath.getValueByJPath(responseJson,key);
                          if(!_value2.contains(except)){
                              countflag++;
                             logger.info(text+"  结果校对错误");
@@ -70,7 +70,7 @@ public class CheckResult {
                 case "start":
                     try {
                         //String _value3= (String) mapresult.get(key);
-                         String _value3=GetJsonByJpath.getValueByJPath(key);
+                         String _value3=GetJsonByJpath.getValueByJPath(responseJson,key);
                         if(!_value3.startsWith(except)){
                             countflag++;
                             logger.info(text+"  结果校对错误");
@@ -84,7 +84,7 @@ public class CheckResult {
                 case "end":
                     try {
                         //String _value4= (String) mapresult.get(key);
-                        String _value4=GetJsonByJpath.getValueByJPath(key);
+                        String _value4=GetJsonByJpath.getValueByJPath(responseJson,key);
                         if(!_value4.endsWith(except)){
                             countflag++;
                             logger.info(text+"  结果校对错误");
