@@ -18,7 +18,7 @@ public class GetJsonByJpath {
                 }
             }
         }
-        return obj.toString();
+        return obj.toString().trim();
     }
 
     
