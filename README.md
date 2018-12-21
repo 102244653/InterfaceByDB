@@ -170,6 +170,25 @@
         start   ---  以value开头
         end     ---  以value结尾       
 
+    取值函数：GetJsonByJpath.getValueByJPath(JSONObject responseJson, String jpath)
+    Json示例：
+    {
+    "status":"success",
+    "data":[
+    {"uid":10000024,"orderId":138531,"changeCredit":"105000","datetime":"2018-12-21 16:02:23"},
+    {"uid":10000026,"orderId":138532,"changeCredit":"103200","datetime":"2018-12-21 16:02:28"},
+    {"info":[{"test":"1219"},{"test":"mytest"}]}
+    ],
+    "newCredit":"43202874.28",
+    }    
+    
+    JPath路径：
+    success     取值 => status
+    10000024    取值 => data[0]/uid
+    138532      取值 => data[1]/orderId
+    mytest      取值 => data[2]/info[1]/test
+    43202874.28 取值 => newCredit
+
 七、使用testng数据驱动从数据库直接读取测试套件，避免反复修改testng.xml：
     
     1.新建测试套件表suitcase：
