@@ -1,0 +1,145 @@
+package Utils;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class AnalyticJson {
+
+    private static Logger logger = LoggerFactory.getLogger(AnalyticJson.class);
+
+    public Map AnylistJson(String str) {
+        HashMap map=new HashMap<String, String>();
+        Map json = this.cutjson(str);
+        try {
+            ArrayList<ArrayList<String>> result=this.tostr(json);
+            int j=result.get(0).size();//判断有多少个key
+            for(int i=0;i<j;i++){
+                ArrayList<ArrayList<String>> result0=null;
+                if(this.checkvalue(result.get(1).get(i))){//如果value以{}开头结尾则继续解析
+                    Map json0 = this.cutjson(result.get(1).get(i));
+                    result0=this.tostr(json0);
+                    this.putmap(map,result0);//解析结果保存至map
+                }else {//不满足条件直接保存至map
+                    this.putmap(map,result.get(0).get(i),result.get(1).get(i));
+                }
+            }
+            return map;
+        }catch (Exception e){
+            logger.error("结果解析错误:\n"+str);
+            return json;
+        }
+    }
+
+
+    //解析str成json
+    public Map cutjson(String str) {
+        Map json = (Map) JSONObject.parse(str);
+        return json;
+    }
+
+    //申明一个ArrayList保存key，value，然后返回
+    public ArrayList<ArrayList<String>> tostr(Map json) {
+        ArrayList<ArrayList<String>> RSTR0 = new ArrayList<ArrayList<String>>();
+        ArrayList<String> line1 = new ArrayList<String>();//key值
+        ArrayList<String> line2 = new ArrayList<String>();//value值
+        RSTR0.add(line1);
+        RSTR0.add(line2);
+        for (Object map : json.entrySet()) {
+            String key = String.valueOf(((Map.Entry) map).getKey()).trim();
+            String value = String.valueOf(((Map.Entry) map).getValue()).trim();
+            if(!key.isEmpty() && !value.isEmpty()){
+                RSTR0.get(0).add(key);
+                RSTR0.get(1).add(value);
+            }
+        }
+        return RSTR0;
+    }
+
+    //判断字符串结果是否以{}开头结尾，满足则继续解析
+    public Boolean checkvalue(String str){
+        boolean flag=false;
+        if((str.startsWith("{") && str.endsWith("}"))){
+            flag=true;
+        }
+        // (str.startsWith("[") && str.endsWith("]"))
+        return flag;
+    }
+
+    //将解析的结果放进map保存
+    public void putmap(HashMap<String, String> map,ArrayList<ArrayList<String>> result){
+        int k=result.get(0).size();
+        for(int i=0;i<k;i++) {
+            if (!result.get(0).get(i).isEmpty() && !result.get(1).get(i).isEmpty()) {
+                map.put(result.get(0).get(i), result.get(1).get(i));
+            }
+        }
+    }
+
+    public void putmap(HashMap<String, String> map,String key,String value){
+        if(!key.isEmpty()  && !value.isEmpty()){
+            map.put(key,value);
+        }
+    }
+
+}
+
+class GetJsonValue{
+
+    //根据节点获取值
+    public  String getValueByJPath(JSONObject responseJson, String jpath){
+        Object obj = responseJson;
+        for(String s : jpath.split("/")) {
+            if(!s.isEmpty()) {
+                if(!(s.contains("[") || s.contains("]"))) {
+                    obj = ((JSONObject) obj).get(s);
+                }else if(s.contains("[") || s.contains("]")) {
+                    obj =((JSONArray)((JSONObject)obj).get(s.split("\\[")[0]))
+                            .get(Integer.parseInt(s.split("\\[")[1].replaceAll("]", "")));
+                }
+            }
+        }
+        return obj.toString();
+    }
+
+    //根据节点获取值长度
+    public  int getLenghtByJPath(JSONObject responseJson, String jpath){
+        Object obj = responseJson;
+        int lenght=0;
+        for(String s : jpath.split("/")) {
+            if(!s.isEmpty()) {
+                if(!(s.contains("[") || s.contains("]"))) {
+                    lenght = ((JSONObject) obj).get(s).toString().trim().length();
+                }else if(s.contains("[") || s.contains("]")) {
+                    obj =((JSONArray)((JSONObject)obj).get(s.split("\\[")[0]))
+                            .get(Integer.parseInt(s.split("\\[")[1].replaceAll("]", "")));
+                    lenght=obj.toString().length();
+                }
+            }
+        }
+        return lenght;
+    }
+
+    //获取数组长度
+    public  int geySizeByJpath(JSONObject responseJson, String jpath){
+        Object obj = responseJson;
+        int size=0;
+        for(String s : jpath.split("/")) {
+            if(!s.isEmpty()) {
+                if(!( s.contains("[") || s.contains("]")) && !s.startsWith("$")) {
+                    obj = ((JSONObject) obj).get(s);
+                }else if(s.contains("[") || s.contains("]")) {
+                    obj =((JSONArray)((JSONObject)obj).get(s.split("\\[")[0]))
+                            .get(Integer.parseInt(s.split("\\[")[1].replaceAll("]", "")));
+                }else if(s.startsWith("$")){
+                    size= ((JSONObject) obj).getJSONArray(s.replace("$","")).size();
+                }
+            }
+        }
+        return size;
+    }
+}

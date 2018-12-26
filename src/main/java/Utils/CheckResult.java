@@ -1,9 +1,10 @@
 package Utils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.alibaba.fastjson.JSONObject;
-import Utils.GetJsonByJpath;
+
 import java.util.HashMap;
 
 public class CheckResult {
@@ -15,8 +16,8 @@ public class CheckResult {
     public static boolean checkresult(String response,String exceptresult) throws Exception {
         int countflag=0;
         if(response.isEmpty() && exceptresult.isEmpty()) return false;
-        //HashMap mapresult= (HashMap<String, String>) new AnylistJson().AnylistJson(response);//旧方法解析json
-        JSONObject responseJson = JSON.parseObject(response);        
+       // HashMap mapresult= (HashMap<String, String>) new AnalyticJson().AnylistJson(response);
+        JSONObject responseJson = JSON.parseObject(response);
         String[] object= new CutStrUtil().SplitByIndex(exceptresult,";");
         for(int i=0;i<object.length;i++){
             String text=object[i];
@@ -35,11 +36,12 @@ public class CheckResult {
             if(point2+1!=point3){
                 except=text.substring(point2+1,point3);
             }
+            GetJsonValue gjv=new GetJsonValue();
             switch (type.trim()){
                 case "equals":
                     try {
                         //String _value1= (String) mapresult.get(key);
-                        String _value1=GetJsonByJpath.getValueByJPath(responseJson,key);
+                        String _value1=gjv.getValueByJPath(responseJson,key);
                         if(!_value1.equals(except)){
                             countflag++;
                             logger.info(text+"  结果校对错误");
@@ -52,8 +54,7 @@ public class CheckResult {
                     break;
                 case "contain":
                     try {
-                         //String _value2= (String) mapresult.get(key);
-                         String _value2=GetJsonByJpath.getValueByJPath(responseJson,key);
+                        String _value2=gjv.getValueByJPath(responseJson,key);
                          if(!_value2.contains(except)){
                              countflag++;
                             logger.info(text+"  结果校对错误");
@@ -65,12 +66,34 @@ public class CheckResult {
                      }
                     break;
                 case "length":
-                    logger.info("length方法暂未实现:请根据实际情况扩展");
+                    try {
+                        int _value5=gjv.getLenghtByJPath(responseJson,key);
+                        if(!except.equals(String.valueOf(_value5))){
+                            countflag++;
+                            logger.info(text+"  结果校对错误");
+                        }else {
+                            logger.info(text+"  结果校对正确");
+                        }
+                    }catch (Exception e){
+                        throw new Exception("预期结果断言错误: "+text);
+                    }
+                    break;
+                case "size":
+                    try {
+                        int _value5=gjv.geySizeByJpath(responseJson,key);
+                        if(!except.equals(String.valueOf(_value5))){
+                            countflag++;
+                            logger.info(text+"  结果校对错误");
+                        }else {
+                            logger.info(text+"  结果校对正确");
+                        }
+                    }catch (Exception e){
+                        throw new Exception("预期结果断言错误: "+text);
+                    }
                     break;
                 case "start":
                     try {
-                        //String _value3= (String) mapresult.get(key);
-                         String _value3=GetJsonByJpath.getValueByJPath(responseJson,key);
+                        String _value3=gjv.getValueByJPath(responseJson,key);
                         if(!_value3.startsWith(except)){
                             countflag++;
                             logger.info(text+"  结果校对错误");
@@ -83,8 +106,7 @@ public class CheckResult {
                     break;
                 case "end":
                     try {
-                        //String _value4= (String) mapresult.get(key);
-                        String _value4=GetJsonByJpath.getValueByJPath(responseJson,key);
+                        String _value4=gjv.getValueByJPath(responseJson,key);
                         if(!_value4.endsWith(except)){
                             countflag++;
                             logger.info(text+"  结果校对错误");

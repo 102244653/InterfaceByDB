@@ -16,7 +16,7 @@ public class KeyWordUtil {
     public static String KeyWord(String keyword) throws Exception {
         String text=keyword;
         try {
-            if (keyword.startsWith("$") && keyword.length() < 2) {
+            if (keyword.startsWith("$") && keyword.trim().length() > 2) {
                 int point1 = keyword.trim().indexOf("$");
                 int point2 = keyword.trim().indexOf(":");
                 String key = keyword.substring(point1 + 1, point2).trim();

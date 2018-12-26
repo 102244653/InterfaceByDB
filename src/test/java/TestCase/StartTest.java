@@ -14,6 +14,10 @@ public class StartTest extends InitTest{
 
     @Test(dataProvider="TestData",dataProviderClass= DataSource.class)
     public  void StartTest(String caseqty ,String casename){
+        if(caseqty.isEmpty()  ||  casename.isEmpty()){
+            logger.error("接口名称: "+casename+","+"用例数量: "+caseqty+" -----请检查！");
+            return;
+        }
         BaseCase baseCase=new BaseCase();
         try {
             baseCase.executecase(caseqty,casename);

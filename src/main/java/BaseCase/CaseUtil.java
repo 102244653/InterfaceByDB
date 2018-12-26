@@ -1,8 +1,8 @@
 package BaseCase;
 
 import CaseData.TestUrl;
+import CaseData.login;
 import CaseData.postcode;
-import CaseData.postcode2;
 import Utils.DatabaseUtil;
 
 public class CaseUtil {
@@ -14,16 +14,17 @@ public class CaseUtil {
         BaseCase casedata=new BaseCase();
         if (casename.equals("postcode")){
             postcode casevalue= DatabaseUtil.getSqlSession().selectOne("postcode",i);
-            casedata.setRequest(casevalue.toString()); //请求参数
+            casedata.setRequestbody(casevalue.toString()); //请求参数
             casedata.setType(casevalue.getRequestMethod().trim().toLowerCase()); //读取请求类型
             casedata.setExcepct(casevalue.getExpectResult().trim()); //读取预期结果
             casedata.setIsdo(casevalue.getEffective().trim());//是否执行用例
             casedata.setResultExcel(casevalue.Result());//Excel报告结果
         }
-        if (casename.equals("postcode2")){
-            postcode2 casevalue= DatabaseUtil.getSqlSession().selectOne("postcode",i);
-            casedata.setRequest(casevalue.toString()); //请求参数
+        if (casename.equals("login")){
+            login casevalue= DatabaseUtil.getSqlSession().selectOne("login",i);
+            casedata.setRequestbody(casevalue.toString()); //请求参数
             casedata.setType(casevalue.getRequestMethod().trim().toLowerCase()); //读取请求类型
+            casedata.setUri(casevalue.getURI());//接口地址uri
             casedata.setExcepct(casevalue.getExpectResult().trim()); //读取预期结果
             casedata.setIsdo(casevalue.getEffective().trim());//是否执行用例
             casedata.setResultExcel(casevalue.Result());//Excel报告结果
@@ -31,6 +32,8 @@ public class CaseUtil {
         return casedata;
     }
 
+
+    //设置报告结果数组参数
     public static String[] setResult(String apiname,String casename,String method,String request,String expect) throws Exception {
         String[] result =new String[8];
         result[0]= TestUrl.TestUrl;

@@ -14,12 +14,12 @@ public class InitHtmlReport {
     //private String Reportpath =OUTPUT_FOLDER+"/"+dirc+"/"+FILE_NAME;
     private String Reportpath =OUTPUT_FOLDER+"index.html";
 
-    public  void CreatHtmlReport(){
+    public  void CreatHtmlReport()throws Exception{
         try {
             String template = this.read(templatePath);
-//             File dir = new File(OUTPUT_FOLDER+"/"+dirc);
-//             if (!dir.exists())
-//             {dir.mkdirs();}
+//            File dir = new File(OUTPUT_FOLDER+"/"+dirc);
+//            if (!dir.exists())
+//            {dir.mkdirs();}
             BufferedWriter output = new BufferedWriter( new OutputStreamWriter(new FileOutputStream(new File(Reportpath)),"UTF-8"));
             template = template.replaceFirst("\\$\\{resultData\\}", ResultData.GetResultData());
             output.write(template);

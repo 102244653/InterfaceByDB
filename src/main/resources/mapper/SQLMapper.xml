@@ -1,46 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="CaseData">
-
     <!--<查询本次执行用例的环境>-->
-    <select id="testurl"  resultType="String">
-        select testurl from testurl ;
-    </select>
+    <select id="testurl"  resultType="String">select testurl from testurl ;</select>
     <!--<查询测试套件中需要执行的接口数量>-->
-    <select id="Tsuit"  resultType="Integer">
-        select count(*) from suitcase where effictive="T";
-    </select>
+    <select id="Tsuit"  resultType="Integer">select count(*) from suitcase where effictive="T";</select>
     <!--<查询测试套件中的接口总数量>-->
-    <select id="allsuit"  resultType="Integer">
-        select count(*) from suitcase ;
-    </select>
+    <select id="allsuit"  resultType="Integer">select count(*) from suitcase ;</select>
     <!--<查询测试套件中需要执行的接口参数值>-->
-    <select id="casesuit" parameterType="Integer" resultType="CaseData.suitcase">
-        select * from suitcase where ID=#{id};
-    </select>
+    <select id="casesuit" parameterType="Integer" resultType="CaseData.casesuit">select * from suitcase where ID=#{id};</select>
     <!--<以上类容不可更改，下面的sql根据接口自定义>-->
 
-    <!--<select id="MyInfo" parameterType="Integer" resultType="CaseData.MyInfo">-->
-    <!--select * from myinfo WHERE id=#{id};-->
-    <!--</select>-->
+    <select id="postcodecount"  resultType="Integer">select count(*) from postcode;</select>
 
-    <!--<select id="count"  resultType="Integer">-->
-    <!--select count(*) from myinfo;-->
-    <!--</select>-->
+    <select id="postcode" parameterType="Integer" resultType="CaseData.postcode">select * from postcode where ID=#{id};</select>
 
-    <!--<select id="postcase" parameterType="Integer" resultType="CaseData.post">-->
-    <!--select * from post WHERE id=#{id};-->
-    <!--</select>-->
+    <select id="login_qty"  resultType="Integer">select count(*) from login;</select>
 
-    <select id="postcodecount"  resultType="Integer">
-         select count(*) from postcode;
-    </select>
-
-    <select id="postcode" parameterType="Integer" resultType="CaseData.postcode">
-        select * from postcode where ID=#{id};
-    </select>
+    <select id="login" parameterType="Integer" resultType="CaseData.login">select * from login where ID=#{id};</select>
 
 </mapper>
 

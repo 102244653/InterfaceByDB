@@ -7021,7 +7021,7 @@
                                     </div>
                                 </div>
 								<div class="form-group">
-                                    <label class="col-sm-2 control-label text-navy">测试地址:</label>
+                                    <label class="col-sm-2 control-label text-navy">测试环境:</label>
                                     <div class="col-sm-5">
                                         <span class="form-control" id="testadress"></span>
                                     </div>
@@ -7239,7 +7239,7 @@
                     var tr = "<tr style='font-family: Consolas'>" +
                         "<td>" + (i + 1) + "</td>" +
                         "<td>" + n["apiname"] + "</td>" +
-                        "<td>" + n["casename"] + "</td>" +
+                        "<td>" + n["interfacename"] + "</td>" +
                         "<td>" +"<a target=\"_blank\" href=\""+n["requesttype"]+"\"> "+n["requesttype"]+"</a>"+ "</td>" +
                         "<td>" + n["requestbody"] + "</td>" +
 						"<td>"+n["excepct"]+"</td>"+

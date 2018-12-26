@@ -44,9 +44,9 @@ public class ResultData {
             if(i!=0){ json = json + ",\n"; }
             json=json+"\n{" +
                     "\"apiname\":\""+data[1]+ "\",\n" +
-                    "\"casename\":\""+data[2]+ "\",\n" +
+                    "\"interfacename\":\""+data[2]+ "\",\n" +
                     "\"requesttype\":\""+data[3]+ "\",\n" +
-                    "\"requestbody\":\""+data[4]+ "\",\n" +
+                    "\"requestbody\":\""+data[4].replaceAll("\"","'")+ "\",\n" +
                     "\"excepct\":\""+data[5]+ "\",\n" +
                     "\"result\":\""+result+ "\",\n" +
                     "\"log\":[`"+data[6].replaceAll("\"","'")+ "`]\n" +

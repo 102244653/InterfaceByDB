@@ -1,0 +1,28 @@
+//创建测试套件表
+CREATE TABLE `suitcase` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '序号',
+  `interfacename` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '测试接口名称',
+  `caseqty` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '测试用例数量',
+  `effictive` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '该接口是否测试',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+
+//创建测试环境管理表
+CREATE TABLE `testurl` (
+  `testurl` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+//创建接口用例表
+CREATE TABLE `login` (
+  `ID` int(12) NOT NULL AUTO_INCREMENT,
+  `CaseName` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `RequestMethod` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `postcode` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `areaname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `appkey` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sign` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `format` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ExpectResult` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `Effective` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

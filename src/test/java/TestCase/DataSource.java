@@ -4,7 +4,7 @@ import Utils.DatabaseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
-import CaseData.suitcase;
+import CaseData.casesuit;
 import java.io.IOException;
 
 public class DataSource {
@@ -15,21 +15,27 @@ public class DataSource {
     public static Object[][] TestData(){
         Object[][] suitcase;
         try {
+            //需要测试的接口数量
             int qty= DatabaseUtil.getSqlSession().selectOne("Tsuit");
+            //接口总数量
             int suitqty= DatabaseUtil.getSqlSession().selectOne("allsuit");
+            if(qty==0 || String.valueOf(qty)==null){
+                logger.error("未查找到需要测试的接口用例套件，请检查casesuit表设置！");
+                return null;
+            }
             suitcase=new Object[qty][2];
             for(int i=1,k=0;i<=suitqty;i++){
-                suitcase suit=DatabaseUtil.getSqlSession().selectOne("casesuit",i);
+                casesuit suit=DatabaseUtil.getSqlSession().selectOne("casesuit",i);
                 if(suit.getEffictive().equals("F")){
-                    logger.error("casesuit表第"+i+"行"+suit.getCasename()+" 用例本次设置为不执行，将自动跳过！");
+                    logger.error("casesuit表第"+i+"行 "+suit.getInterfacename()+" 用例本次设置为不执行，将自动跳过！");
                     continue;
                 }
-                if(!suit.getCasename().isEmpty() && !suit.getCaseqty().isEmpty() ) {
+                if(!suit.getInterfacename().isEmpty() && !suit.getCaseqty().isEmpty() ) {
                     suitcase[k][0] = suit.caseqty;
-                    suitcase[k][1] = suit.casename;
+                    suitcase[k][1] = suit.interfacename;
                     k++;
                 }else {
-                    logger.error("casesuit表第"+i+"行"+suit.getCasename()+" | "+suit.getCaseqty()+" 数据异常，请检查！");
+                    logger.error("casesuit表第"+i+"行 "+suit.getInterfacename()+" | "+suit.getCaseqty()+" 数据异常，请检查！");
                 }
             }
         } catch (IOException e) {

@@ -1,6 +1,5 @@
 package HttpUtils;
-
-
+import BaseCase.NewCookie;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -9,6 +8,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.message.BasicHeader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,6 +29,8 @@ public class HttpUtil {
         // 创建get请求
         logger.info("开始发送GET请求...");
         HttpGet httpGet = new HttpGet(httpUrl);
+        httpGet.setHeader("Connection","keep-alive");
+      //  httpGet.addHeader(new BasicHeader("Cookie", cookies));
         return client.sendGet(httpGet);
     }
 
@@ -70,6 +72,9 @@ public class HttpUtil {
                 StringEntity stringEntity = new StringEntity(paramsJson, "UTF-8");
                 stringEntity.setContentType(Config.CONTENT_TYPE_JSON_URL);
                 httpPost.setEntity(stringEntity);
+                if(NewCookie.Cookie.equals("")){
+                    httpPost.setHeader("Cookies", NewCookie.Cookie);
+                }
             }else {
                 logger.error("请求参数为空...");
             }
