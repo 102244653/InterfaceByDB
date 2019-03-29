@@ -6,8 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
-
 public class StartTest extends InitTest{
 
     private static Logger logger = LoggerFactory.getLogger(StartTest.class);

@@ -3,20 +3,16 @@
 
 <mapper namespace="CaseData">
     <!--<查询本次执行用例的环境>-->
-    <select id="testurl"  resultType="String">select testurl from testurl ;</select>
+    <select id="testadress" parameterType="String" resultType="String">select url from testadress where type=#{type};</select>
     <!--<查询测试套件中需要执行的接口数量>-->
-    <select id="Tsuit"  resultType="Integer">select count(*) from suitcase where effictive="T";</select>
+    <select id="Tsuit" resultType="Integer">select count(*) from casesuit where effictive="T";</select>
     <!--<查询测试套件中的接口总数量>-->
-    <select id="allsuit"  resultType="Integer">select count(*) from suitcase ;</select>
+    <select id="allsuit" resultType="Integer">select count(*) from casesuit ;</select>
     <!--<查询测试套件中需要执行的接口参数值>-->
-    <select id="casesuit" parameterType="Integer" resultType="CaseData.casesuit">select * from suitcase where ID=#{id};</select>
+    <select id="casesuit" parameterType="Integer" resultType="CaseData.casesuit">select * from casesuit where ID=#{id};</select>
     <!--<以上类容不可更改，下面的sql根据接口自定义>-->
 
-    <select id="postcodecount"  resultType="Integer">select count(*) from postcode;</select>
-
-    <select id="postcode" parameterType="Integer" resultType="CaseData.postcode">select * from postcode where ID=#{id};</select>
-
-    <select id="login_qty"  resultType="Integer">select count(*) from login;</select>
+    <select id="login_qty" resultType="Integer">select count(*) from login;</select>
 
     <select id="login" parameterType="Integer" resultType="CaseData.login">select * from login where ID=#{id};</select>
 

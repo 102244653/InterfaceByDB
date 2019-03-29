@@ -7155,6 +7155,7 @@
 <script type="text/javascript">
     var resultData = ${resultData};
 
+
     function clickRow(obj){
         $("#detailBody").children("tr").attr("style","font-family: Consolas");
         $(obj).attr("style","font-family: Consolas; background-color: #b0d877");
@@ -7240,7 +7241,7 @@
                         "<td>" + (i + 1) + "</td>" +
                         "<td>" + n["apiname"] + "</td>" +
                         "<td>" + n["interfacename"] + "</td>" +
-                        "<td>" +"<a target=\"_blank\" href=\""+n["requesttype"]+"\"> "+n["requesttype"]+"</a>"+ "</td>" +
+                        "<td>" +n["requesttype"]+"</td>" +
                         "<td>" + n["requestbody"] + "</td>" +
 						"<td>"+n["excepct"]+"</td>"+
                         result + "<td><button type='button' onclick='details(this)' buttonIndex='" + i + "' class='btn btn-primary btn-xs' style='margin-bottom: 0px'>展开</button></td></tr>"

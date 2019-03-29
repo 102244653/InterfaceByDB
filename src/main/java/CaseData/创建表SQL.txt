@@ -9,7 +9,8 @@ CREATE TABLE `suitcase` (
 
 //创建测试环境管理表
 CREATE TABLE `testurl` (
-  `testurl` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `testurl` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 //创建接口用例表

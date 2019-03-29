@@ -27,15 +27,15 @@ public class DataSource {
             for(int i=1,k=0;i<=suitqty;i++){
                 casesuit suit=DatabaseUtil.getSqlSession().selectOne("casesuit",i);
                 if(suit.getEffictive().equals("F")){
-                    logger.error("casesuit表第"+i+"行 "+suit.getInterfacename()+" 用例本次设置为不执行，将自动跳过！");
+                    logger.error("casesuit表第"+i+"行 "+suit.getApiname()+" 用例本次设置为不执行，将自动跳过！");
                     continue;
                 }
-                if(!suit.getInterfacename().isEmpty() && !suit.getCaseqty().isEmpty() ) {
+                if(!suit.getApiname().isEmpty() && !suit.getCaseqty().isEmpty() ) {
                     suitcase[k][0] = suit.caseqty;
-                    suitcase[k][1] = suit.interfacename;
+                    suitcase[k][1] = suit.apiname;
                     k++;
                 }else {
-                    logger.error("casesuit表第"+i+"行 "+suit.getInterfacename()+" | "+suit.getCaseqty()+" 数据异常，请检查！");
+                    logger.error("casesuit表第"+i+"行 "+suit.getApiname()+" | "+suit.getCaseqty()+" 数据异常，请检查！");
                 }
             }
         } catch (IOException e) {
@@ -45,10 +45,9 @@ public class DataSource {
         return suitcase;
     }
 
-    private static Object[] temp; //temp存储非null元素
-    private static Object[][] result;//最终结果
 
-    //过滤二维数组空元素
+
+    //过滤二维数组空元素,未使用
     public static Object[][] deletenull(Object[][] objects){
         int firstDimesion = objects.length;//二维数组初始长度
         for(int i=0; i<objects.length; i++){
@@ -65,11 +64,13 @@ public class DataSource {
             result[firstDimesion] = new Object[2];//第一个值含两个元素
             for (int k = 0; k < 2; k++){
                 result[firstDimesion][k] = temp[k];//给两个元素赋值
-             }
-             if(i!=objects.length){
-                 firstDimesion ++; //长度增一，初始化下一个数组
-             }
+            }
+            if(i!=objects.length){
+                firstDimesion ++; //长度增一，初始化下一个数组
+            }
         }
         return result;
     }
+    private static Object[] temp; //temp存储非null元素
+    private static Object[][] result;//最终结果
 }

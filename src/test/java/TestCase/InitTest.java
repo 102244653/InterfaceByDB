@@ -18,22 +18,13 @@ public class InitTest {
     //读取测试地址
     @BeforeSuite
     public void readURL() throws Exception {
-       TestUrl.gettesturl();
+        TestUrl.gettesturl("test");
     }
 
     //初始化报告文件
     @BeforeTest
     public void beforeTest(){
-        try {
-            //设置全局Cookie
-            String text=ConfigFile.getUrl("BaseCookie");
-            if(!text.isEmpty()){
-                new NewCookie(text);
-            }
-            InitExcelReport.InitExcel();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+
     }
 
     //生成html报告文件
@@ -53,7 +44,7 @@ public class InitTest {
     //报告路径
     protected static String path=System.getProperty("user.dir")+"\\TestReport\\report.xls";
 
-   // @AfterSuite
+    // @AfterSuite
     public void aftersuit(){
         new SendEmail().SendReport(title,content,path);
     }
